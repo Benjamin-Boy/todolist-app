@@ -1,0 +1,141 @@
+.todo-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem;
+  margin: 0.8rem 0;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  animation: todoAppears 250ms forwards;
+
+  .todo-name {
+    width: 90%;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+
+    .todo-input {
+      font-size: 2.2rem;
+      width: 90%;
+      height: 3.2rem;
+      line-height: 3rem;
+      padding-bottom: 0.5rem;
+      padding-left: 0.5rem;
+      outline: none;
+      border: 1px solid #674ea7;
+      border-radius: 0.5rem;
+
+      &:disabled {
+        cursor: pointer;
+        color: #fff;
+        border: none;
+        background-color: inherit;
+      }
+    }
+
+    .todo-checkbox {
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+
+      font: inherit;
+      color: currentColor;
+      width: 2.8rem;
+      height: 2.8rem;
+      border: 0.15em solid currentColor;
+      border-radius: 0.15em;
+      transform: translateY(-0.075em);
+
+      display: grid;
+      place-content: center;
+
+      &::before {
+        content: "";
+        width: 1.5em;
+        height: 1.5em;
+        // clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        transform: scale(0);
+        transform-origin: center;
+        transition: 120ms transform ease-in-out;
+        background-color: #fff;
+      }
+
+      &:checked::before {
+        transform: scale(1);
+      }
+    }
+
+    @media screen and (max-width: 1040px) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .todo-btn {
+    width: 30%;
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    justify-content: flex-end;
+
+    @media screen and (max-width: 1040px) {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn {
+      @media screen and (max-width: 1040px) {
+        width: 50%;
+      }
+    }
+  }
+
+  // .todoRemoved {
+  //   animation: todoRemoved 150ms forwards;
+  // }
+
+  &:hover {
+    background-color: #d9d2e9;
+
+    .todo-input:disabled {
+      color: #351c75;
+    }
+
+    .todo-checkbox {
+      color: #351c75;
+
+      &::before {
+        background-color: #351c75;
+      }
+    }
+  }
+
+  @keyframes todoAppears {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  // @keyframes todoRemoved {
+  //   0% {
+  //     transform: translateX(0);
+  //   }
+  //   100% {
+  //     transform: translateY(-100%);
+  //   }
+  // }
+
+  @media screen and (max-width: 1040px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.4rem;
+    margin: 0;
+  }
+}

@@ -1,0 +1,21 @@
+.todolist-container {
+  .todolist-create {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+
+    .add-todo-input {
+      width: 90%;
+      height: 2.5rem;
+      font-size: 1rem;
+      padding: 0.3rem;
+      outline: none;
+      border: 1px solid #674ea7;
+      border-radius: 0.3rem 0 0 0.3rem;
+    }
+
+    .add-todo-btn {
+      border-radius: 0 0.3rem 0.3rem 0;
+    }
+  }
+}
