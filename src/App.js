@@ -3,7 +3,6 @@ import TodoList from "./components/TodoList/TodoList";
 
 import "./app.scss";
 
-// TODO Changer le css si elle est remplie
 // TODO Renvoyer en fin de liste, ou dans une autre liste en dessous, les tâches complétées
 
 const App = () => {
@@ -14,7 +13,7 @@ const App = () => {
   });
   const [todolist, setTodolist] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [donelist, setDonelist] = useState([]);
+  // const [donelist, setDonelist] = useState([]);
 
   const addTodo = (todo) => {
     if (todo.name !== "") {
@@ -27,6 +26,7 @@ const App = () => {
       isEditing: false,
       isDone: false,
     });
+    
   };
 
   const handleChange = (e) => {
@@ -38,34 +38,30 @@ const App = () => {
   };
 
   const editTodo = (id) => {
-    // const target = e.target
-    //   .closest(".todo-container")
-    //   .querySelector(".todo-input");
 
-    if (todolist[id].isEditing) {
-      // target.setAttribute("disabled", "");
-      // target.removeAttribute("disabled");
-      const editTodo = { ...todolist[id], isEditing: false };
-      setTodo(editTodo);
+    if(!isEditing) {
+      const newTodolist = todolist.map(todo => {
+        if (todo === todolist[id]) {
+          return {...todo, isEditing: true};
+        }
+        return todo;
+      });
 
-      // todolist.map(todo => {
-      //   if () {
-
-      //   }
-      // });
-      setTodolist([...todolist, editTodo]);
-
-      setIsEditing(false);
-    } else {
-      // target.removeAttribute("disabled");
-      const editTodo = { ...todolist[id], isEditing: true };
-      setTodo(editTodo);
-      setTodolist([...todolist, editTodo]);
+      setTodolist(newTodolist);
       setIsEditing(true);
-    }
-  };
+    } else if(isEditing && todolist[id].isEditing){
+        const newTodolist = todolist.map(todo => {
+          if (todo === todolist[id]) {
+            return {...todo, isEditing: false};
+          }
+          return todo;
+        });
 
-  console.log(todolist);
+        setTodolist(newTodolist);
+        setIsEditing(false);
+    }
+
+  };
 
   const removeTodo = (id) => {
     setTodolist((prevState) => {
@@ -74,10 +70,27 @@ const App = () => {
   };
 
   const checkTodo = (id) => {
-    setDonelist((prevState) => [...prevState, todolist[id]]);
-    setTodolist((prevState) => {
-      return prevState.filter((todo) => todolist.indexOf(todo) !== id);
-    });
+    // setDonelist((prevState) => [...prevState, todolist[id]]);
+    let newTodolist;
+
+    if(todolist[id].isDone){
+      newTodolist = todolist.map(todo => {
+        if(todo === todolist[id]){
+          return {...todo, isDone: false};
+        }
+        return todo;
+      });
+    }
+    else {
+      newTodolist = todolist.map(todo => {
+        if(todo === todolist[id]){
+          return {...todo, isDone: true};
+        }
+        return todo;
+      });
+    }
+
+    setTodolist(newTodolist);
   };
 
   return (
@@ -91,7 +104,7 @@ const App = () => {
         addTodo={addTodo}
         handleChange={handleChange}
         todolist={todolist}
-        donelist={donelist}
+        // donelist={donelist}
         editTodo={editTodo}
         removeTodo={removeTodo}
         checkTodo={checkTodo}

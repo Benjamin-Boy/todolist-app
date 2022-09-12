@@ -8,7 +8,6 @@ const TodoList = ({
   addTodo,
   handleChange,
   todolist,
-  donelist,
   editTodo,
   removeTodo,
   checkTodo,
@@ -28,22 +27,6 @@ const TodoList = ({
       </section>
       <section className="todolist-list">
         {todolist.map((todo, index) => {
-          return (
-            <Todo
-              key={index}
-              id={index}
-              todo={todo}
-              editTodo={editTodo}
-              removeTodo={removeTodo}
-              handleChange={handleChange}
-              isEditing={isEditing}
-              checkTodo={checkTodo}
-            />
-          );
-        })}
-      </section>
-      <section className="donelist-list">
-        {donelist.map((todo, index) => {
           return (
             <Todo
               key={index}

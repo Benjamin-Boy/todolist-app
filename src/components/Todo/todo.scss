@@ -59,7 +59,7 @@
         transform: scale(0);
         transform-origin: center;
         transition: 120ms transform ease-in-out;
-        background-color: #fff;
+        background-color: #b5ff00;
       }
 
       &:checked::before {
@@ -139,3 +139,14 @@
     margin: 0;
   }
 }
+
+.todo-checked{
+  border: 1px solid #b5ff00;
+
+  &:hover{
+    background-color: #e2e9d2;
+    color:#000;
+  }
+}
+
+

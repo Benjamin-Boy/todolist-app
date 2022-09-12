@@ -2,15 +2,19 @@ import { useState, useEffect } from "react";
 import { FiEdit, FiDelete, FiCheck } from "react-icons/fi";
 import "./todo.scss";
 
-const Todo = ({ todo, id, editTodo, removeTodo, isEditing, checkTodo }) => {
-  const [editedTodo, setEditedTodo] = useState({ ...todo });
+const Todo = ({ todo, id, editTodo, removeTodo, checkTodo }) => {
+  const [editedTodo, setEditedTodo] = useState(todo);
 
   useEffect(() => {
-    setEditedTodo(editedTodo);
-  }, [editedTodo]);
+    setEditedTodo({
+      name: (editedTodo.isDone || editedTodo.isEditing) ? editedTodo.name : todo.name,
+      isEditing: todo.isEditing,
+      isDone: todo.isDone
+    });
+  }, [todo, editedTodo.name, editedTodo.isDone, editedTodo.isEditing]);
 
   return (
-    <div className="todo-container">
+    <div className={editedTodo.isDone ? "todo-container todo-checked" : "todo-container"}>
       <section className="todo-name">
         <input
           type="checkbox"
@@ -20,8 +24,9 @@ const Todo = ({ todo, id, editTodo, removeTodo, isEditing, checkTodo }) => {
         <input
           type="text"
           value={editedTodo.name}
-          onChange={(e) => setEditedTodo(e.target.value)}
+          onChange={(e) => setEditedTodo({...editedTodo, name: e.target.value})}
           className="todo-input"
+          disabled={editedTodo.isEditing ? false : true}
         />
       </section>
 
